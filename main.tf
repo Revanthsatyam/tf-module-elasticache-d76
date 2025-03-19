@@ -1,5 +1,5 @@
 resource "aws_elasticache_subnet_group" "main" {
-  name       = "${local.name_prefix}-elasticache-subnet-group"
+  name       = "${local.name_prefix}-subnet-group"
   subnet_ids = var.subnet_ids
   tags       = merge(local.tags, { Name = "${local.name_prefix}-subnet-group" })
 }
@@ -27,9 +27,9 @@ resource "aws_security_group" "main" {
 }
 
 resource "aws_elasticache_parameter_group" "main" {
-  name   = "${local.name_prefix}-elasticache-pg"
+  name   = "${local.name_prefix}-pg"
   family = var.engine_family
-  tags   = merge(local.tags, { Name = "${local.tags}-elasticache-pg" })
+  tags   = merge(local.tags, { Name = "${local.name_prefix}-pg" })
 }
 
 resource "aws_elasticache_cluster" "main" {
